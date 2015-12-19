@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="./static/css/customcss.css" />
+    <script>
+        // A $( document ).ready() block.
+        $( document ).ready(function() {
+            $(".image").click(function(event, element){
+                // Holds the product ID of the clicked element
+                console.log(event.target)
+                $(event.target).toggleClass('image')
+            });
+        });
+
+    </script>
+
+    <title>Elitescripts Image Board</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Elitescripts</a>
+        </div>
+      </div>
+    </nav>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Image Board</h1>
+        <p>An Image Board for individuals looking to post anonymously. </p>
+        <p><center><a class="btn btn-success btn-lg" href="#" role="button" data-toggle="modal" data-target="#myModal">Post a New Topic</a></center></p>
+      </div>
+    </div>
+    <div class="container">
+        {% for post in posts %}
+            <div class="well">
+                <span class="label label-primary">Anonymous</span>
+                <span class="label label-default">{{ post.image_size }}kb</span>
+                <span class="label label-default">{{ post.insert_timestamp }}</span>
+                <span class="label label-default">No. {{post.id}}</span>
+                <br> <img class="image" src="./static/images/{{ post.post_image }}" >
+                <BLOCKQUOTE>{{post.comment}} </BLOCKQUOTE>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create a New Post</h4>
+                </div>
+                <form enctype="multipart/form-data" action="{{ url_for('post') }}" method="post">
+                    <div class="modal-body">
+                        <input class="btn btn-primary btn-file" id="upload" type="file" name="pic" accept="image/*">
+
+                        <div class="form-group">
+                            <label for="comment">Comment:</label>
+                            <textarea name="comment" class="form-control" rows="5" id="comment"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-success">Post</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
