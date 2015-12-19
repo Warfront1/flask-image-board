@@ -21,3 +21,15 @@
     cursor: inherit;
     display: block;
 }
+
+.page-header {
+  margin-top: 2%; /* The reason for this is because bootstrap hasn't fixed their shit since they started bootstrap 4. */
+                   /* The jumbotron will shift into the navbar when re-sizing the website if this isn't here. */
+}
+
+.logo {
+  text-transform: uppercase;
+  font-family: 'OpenSansBold', sans-serif;
+  letter-spacing: 0.5px;
+  font-size: 15pt;
+}

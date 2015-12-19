@@ -23,7 +23,7 @@ def hello_world():
                     from posts
                     order by insert_timestamp desc
                     limit 10""")
-    return render_template('main.html', posts=cur.fetchall())
+    return render_template('index.html', posts=cur.fetchall())
 
 @app.route('/post', methods=['POST'])
 def post():
@@ -61,5 +61,5 @@ def post():
     # return Response(status=204)
     return hello_world()
 
-if __name__ == '__main__':
+if __name__ == 'inde':
     app.run(host='0.0.0.0')

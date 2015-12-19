@@ -12,7 +12,10 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="./static/css/customcss.css" />
+    <!-- Google Font Import -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <!-- Import for custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
     <script>
         // A $( document ).ready() block.
         $( document ).ready(function() {
@@ -38,12 +41,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Elitescripts</a>
+          <a class="navbar-brand logo" href="#">Elitescripts</a>
         </div>
       </div>
     </nav>
-    <div class="jumbotron">
+
+    <div class="jumbotron page-header">
       <div class="container">
+        <!--Warnings for outdated browsers-->
+        <!--[if lt IE 7]>
+          <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> You are using an <strong>OUTDATED</strong> browser. Please upgrade your browser to improve your experience.</div>
+        <![endif]-->
+        <!--[if IE 7]>
+          <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> You are using an <strong>OUTDATED</strong> browser. Please upgrade your browser to improve your experience.</div>
+        <![endif]-->
+        <!--[if IE 8]>
+          <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> You are using an <strong>OUTDATED</strong> browser. Please upgrade your browser to improve your experience.</div>
+        <![endif]-->
+        <!--Warnings for outdated browsers End-->
         <h1>Image Board</h1>
         <p>An Image Board for individuals looking to post anonymously. </p>
         <p><center><a class="btn btn-success btn-lg" href="#" role="button" data-toggle="modal" data-target="#myModal">Post a New Topic</a></center></p>
