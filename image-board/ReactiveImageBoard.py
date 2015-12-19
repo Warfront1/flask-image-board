@@ -61,5 +61,5 @@ def post():
     # return Response(status=204)
     return hello_world()
 
-if __name__ == 'index':
+if __name__ == '__main__':
     app.run(host='0.0.0.0')
