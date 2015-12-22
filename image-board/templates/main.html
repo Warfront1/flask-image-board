@@ -14,15 +14,20 @@
 
     <link rel="stylesheet" type="text/css" href="./static/css/customcss.css" />
     <script>
-        // A $( document ).ready() block.
         $( document ).ready(function() {
             $(".image").click(function(event, element){
-                // Holds the product ID of the clicked element
-                console.log(event.target)
+                console.log(event.target);
                 $(event.target).toggleClass('image')
             });
-        });
 
+            $( ".btn" ).click(function(event, element) {
+                console.log(event.target);
+                if ($(event.target).attr('value') != undefined) {
+                    $('#reply_to_id').val($(event.target).attr('value'));
+                    console.log($('#reply_to_id')[0]);
+                }
+            });
+        });
     </script>
 
     <title>Elitescripts Image Board</title>
@@ -46,19 +51,30 @@
       <div class="container">
         <h1>Image Board</h1>
         <p>An Image Board for individuals looking to post anonymously. </p>
-        <p><center><a class="btn btn-success btn-lg" href="#" role="button" data-toggle="modal" data-target="#myModal">Post a New Topic</a></center></p>
+        <p><center><a value=-1 class="btn btn-success btn-lg" href="#" role="button" data-toggle="modal" data-target="#myModal">Post a New Topic</a></center></p>
       </div>
     </div>
     <div class="container">
-        {% for post in posts %}
-            <div class="well">
-                <span class="label label-primary">Anonymous</span>
-                <span class="label label-default">{{ post.image_size }}kb</span>
-                <span class="label label-default">{{ post.insert_timestamp }}</span>
-                <span class="label label-default">No. {{post.id}}</span>
-                <br> <img class="image" src="./static/images/{{ post.post_image }}" >
-                <BLOCKQUOTE>{{post.comment}} </BLOCKQUOTE>
-            </div>
+        {% for thread in threads %}
+            {% set count = 1 %}
+            {% for post in thread %}
+                {%  if count > 1 %}
+                    <div class="col-xs-1 hidden-xs"></div>
+                    <div class="well col-xs-11">
+                {% endif %}
+                {%  if count == 1 %}
+                    <div class="well col-xs-12">
+                {% endif %}
+                    <span class="label label-primary">Anonymous</span>
+                    <span class="label label-default">{{ post.image_size }}kb</span>
+                    <span class="label label-default">{{ post.insert_timestamp }}</span>
+                    <span class="label label-default">No. {{post.id}}</span>
+                    <a value ="{{ post.id }}" class="btn btn-primary btn-xs pull-right" href="#" role="button" data-toggle="modal" data-target="#myModal">Reply</a>
+                    <br> <img class="image" src="./static/images/{{ post.post_image }}" >
+                    <BLOCKQUOTE>{{post.comment}} </BLOCKQUOTE>
+                </div>
+                {% set count = count + 1 %}
+            {% endfor %}
         {% endfor %}
     </div>
 
@@ -73,6 +89,7 @@
                     <h4 class="modal-title">Create a New Post</h4>
                 </div>
                 <form enctype="multipart/form-data" action="{{ url_for('post') }}" method="post">
+                    <input type="hidden" id="reply_to_id" name="reply_to_id">
                     <div class="modal-body">
                         <input class="btn btn-primary btn-file" id="upload" type="file" name="pic" accept="image/*">
 
