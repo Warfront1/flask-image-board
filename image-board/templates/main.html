@@ -84,6 +84,9 @@
                     <a value ="{{ post.id }}" class="btn btn-primary btn-xs pull-right" href="#" role="button" data-toggle="modal" data-target="#myModal">Reply</a>
                     <br> <img class="image" src="./static/images/{{ post.post_image }}" >
                     <BLOCKQUOTE>{{post.comment}} </BLOCKQUOTE>
+                    {%  if count == 1 %}
+                        {{thread|length -1}} Replies to Thread
+                    {% endif %}
                 </div>
                 {% set count = count + 1 %}
             {% endfor %}
