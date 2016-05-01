@@ -27,6 +27,18 @@
                     console.log($('#reply_to_id')[0]);
                 }
             });
+
+            $( 'form' ).submit( function( e ) {
+                $.ajax( {
+                  url: '{{ url_for('post') }}',
+                  type: 'POST',
+                  data: new FormData( this ),
+                  processData: false,
+                  contentType: false
+                } );
+                e.preventDefault();
+                window.location.href = "/";
+            } );
         });
     </script>
 
@@ -88,7 +100,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create a New Post</h4>
                 </div>
-                <form enctype="multipart/form-data" action="{{ url_for('post') }}" method="post">
+                <form>
                     <input type="hidden" id="reply_to_id" name="reply_to_id">
                     <div class="modal-body">
                         <input class="btn btn-primary btn-file" id="upload" type="file" name="pic" accept="image/*">
