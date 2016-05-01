@@ -63,6 +63,8 @@ def post():
             if extension in ALLOWED_EXTENSIONS:
                 storage_location = str(post_uuid)+extension
                 print storage_location
+                if not os.path.exists(static_folder_path):
+                    os.makedirs(static_folder_path)
                 final_storage_location = os.path.join(static_folder_path, storage_location)
                 file.save(final_storage_location)
             else:
